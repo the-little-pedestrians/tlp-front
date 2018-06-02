@@ -10,9 +10,9 @@ import 'vuetify/dist/vuetify.min.css'
 
 Vue.use(Vuetify, {
   theme: {
-    primary: '#E53935',
-    secondary: '#FFCDD2',
-    accent: '#3F51B5'
+    primary: '#ddd',
+    secondary: '#333333',
+    accent: '#C52B2B'
   }
 })
 Vue.config.productionTip = false
