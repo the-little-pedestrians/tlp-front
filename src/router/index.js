@@ -3,6 +3,7 @@ import Router from 'vue-router'
 
 import Question from '@/components/questions/Question'
 import Login from '@/components/auth/Login'
+import MonoMovie from '@/components/questions/MonoMovie'
 
 Vue.use(Router)
 
@@ -17,6 +18,11 @@ export default new Router({
       path: '/login',
       name: 'Login',
       component: Login
+    },
+    {
+      path: '/MonoMovie',
+      name: 'MonoMovie',
+      component: MonoMovie
     }
   ]
 })

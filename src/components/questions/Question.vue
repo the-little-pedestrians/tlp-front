@@ -2,7 +2,9 @@
   <div>
     <h1 class="title accent--text">{{ question.title }}</h1>
     <div class="question">
-      <Textual v-if="question.type === 'textual'" :label="question.label" :value="question.value"></Textual>
+      <v-flex sm6 offset-sm3>
+        <Textual v-if="question.type === 'textual'" :label="question.label" :value="question.value"></Textual>
+      </v-flex>
       <MultiMovies v-if="question.type === 'multi'" :movies="question.movies"></MultiMovies>
       <MonoMovie v-if="question.type === 'mono'" :movie="question.movie"></MonoMovie>
     </div>
@@ -34,23 +36,28 @@ export default {
           {
             id: 1,
             title: 'Le Parrain',
-            desc: 'Lorem Ipsum'
+            desc: 'Lorem Ipsum',
+            url: 'http://fr.web.img3.acsta.net/r_1280_720/medias/nmedia/18/35/57/73/18660716.jpg'
           }, {
             id: 2,
             title: 'Titanic',
-            desc: 'Lorem Ipsum'
+            desc: 'Lorem Ipsum',
+            url: 'http://fr.web.img3.acsta.net/r_1280_720/medias/nmedia/18/35/57/73/18660716.jpg'
           }, {
             id: 3,
             title: 'Les Bronzés',
-            desc: 'Lorem Ipsum'
+            desc: 'Lorem Ipsum',
+            url: 'http://fr.web.img3.acsta.net/r_1280_720/medias/nmedia/18/35/57/73/18660716.jpg'
           }, {
             id: 4,
             title: 'Avengers',
-            desc: 'Lorem Ipsum'
+            desc: 'Lorem Ipsum',
+            url: 'http://fr.web.img3.acsta.net/r_1280_720/medias/nmedia/18/35/57/73/18660716.jpg'
           }, {
             id: 5,
             title: 'Star Wars',
-            desc: 'Lorem Ipsum'
+            desc: 'Lorem Ipsum',
+            url: 'http://fr.web.img3.acsta.net/r_1280_720/medias/nmedia/18/35/57/73/18660716.jpg'
           }
         ]
       }, {
@@ -58,8 +65,9 @@ export default {
         title: 'Aimez-vous ce film ?',
         movie: {
           id: 2,
-          title: 'Titanic',
-          desc: 'Lorem Ipsum'
+          title: 'Le parrain',
+          desc: 'Lorem Ipsum',
+          url: 'http://fr.web.img4.acsta.net/r_1280_720/pictures/17/05/09/15/47/313876.jpg'
         }
       }, {
         type: 'textual',
@@ -76,7 +84,6 @@ export default {
         this.index = 0
         return
       }
-
       this.index += 1
     }
   },
