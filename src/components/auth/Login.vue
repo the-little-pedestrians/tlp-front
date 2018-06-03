@@ -4,11 +4,15 @@
       <!-- <div v-if="!isLoggedIn" class="login-container"> -->
       <div class="login-container">
         <div class="title">
-          <h1><span class="s-letter">L</span>es <span class="s-letter">P</span>etits <span class="s-letter">P</span>édestres</h1>
+          <h1>
+            <span class="s-letter">L</span>es <span class="s-letter">P</span>etits <span class="s-letter">P</span>édestres<br>
+            <span class="s-letter">D</span>ont <span class="s-letter">U</span>n <span class="s-letter">A</span>u <span class="s-letter">L</span>ion
+          </h1>
         </div>
         <v-layout class="form-login" row wrap>
           <v-flex xs12 class="email">
             <v-text-field
+              @keyup.enter="logIn"
               id="email"
               v-model="email"
               name="email-input"
@@ -18,12 +22,12 @@
             ></v-text-field>
           </v-flex>
           <v-flex xs12 class="password">
-              <!-- @keyup.enter="logIn({ email, password})" -->
             <v-text-field
+              @keyup.enter="logIn"
               id="password"
               name="password-input"
               v-model="password"
-              label="Mot de passe"
+              label="Password"
               :append-icon="passtype ? 'visibility' : 'visibility_off'"
               :append-icon-cb="() => (passtype = !passtype)"
               :type="passtype ? 'password' : 'text'"
@@ -31,88 +35,88 @@
               color="primary"
             ></v-text-field>
           </v-flex>
-          <v-flex v-if="isRegistering" xs12 class="firstname">
-            <v-text-field
-              id="firstname"
-              v-model="firstname"
-              name="firstname-input"
-              label="Prénom"
-              :hide-details="true"
-              color="primary"
-            ></v-text-field>
+        </v-layout>
+        <div v-if="loginError" class="login-error">
+          {{ loginError }}
+        </div>
+        <v-layout row wrap class="login-button-container">
+          <v-flex xs6>
+            <v-btn
+              class="login-button bordered"
+              flat
+              color="white"
+              dark
+            >Password lost ?</v-btn>
           </v-flex>
-          <v-flex v-if="isRegistering" xs12 class="lastname">
-            <v-text-field
-              id="lastname"
-              name="lastname-input"
-              v-model="lastname"
-              label="Nom"
-              :hide-details="true"
-              color="primary"
-            ></v-text-field>
-              <!-- @keyup.enter="logIn({ email, lastname})" -->
+          <v-flex xs6>
+            <v-btn
+              class="login-button"
+              color="accent primary--text"
+              dark
+              @click.stop="logIn"
+            >Login</v-btn>
           </v-flex>
         </v-layout>
-        <!-- <div v-if="loginError" class="login-error">
-          {{ loginError }}
-        </div> -->
-        <transition name="fade" mode="out-in">
-          <v-layout v-if="isRegistering" row wrap class="login-button-container">
-            <v-flex xs6>
-              <v-btn
-                flat
-                class="login-button bordered"
-                color="white"
-                dark
-                @click.stop="isRegistering = false"
-              >Retour</v-btn>
-            </v-flex>
-            <v-flex xs6>
-              <v-btn
-                class="login-button"
-                color="accent"
-                dark
-              >Valider</v-btn>
-                <!-- @click.stop="register({ email, password, firstname, lastname })" -->
-            </v-flex>
-          </v-layout>
-          <v-layout v-else row wrap class="login-button-container">
-            <v-flex xs6>
-              <v-btn
-                class="login-button bordered"
-                flat
-                color="white"
-                dark
-                @click.stop="isRegistering = true"
-              >S'enregister</v-btn>
-            </v-flex>
-            <v-flex xs6>
-              <v-btn
-                class="login-button"
-                color="accent primary--text"
-                dark
-              >Se connecter</v-btn>
-                <!-- @click.stop="logIn({ email, password })" -->
-            </v-flex>
-          </v-layout>
-        </transition>
       </div>
     </transition>
   </div>
 </template>
 
 <script>
+import { LOGIN } from '@/queries'
+import { apolloClient } from '@/main'
+
 export default {
   name: 'Login',
 
   data: () => ({
+    loginError: null,
     email: '',
     password: '',
-    firstname: '',
-    lastname: '',
-    passtype: true,
-    isRegistering: false
-  })
+    passtype: true
+  }),
+
+  methods: {
+    async logIn () {
+      if (!this.email) {
+        this.loginError = 'The Email field is required.'
+        return
+      }
+      if (!this.password) {
+        this.loginError = 'The Password field is required.'
+        return
+      }
+      // eslint-disable-next-line
+      if (!this.email.match(/^([\w\!\#$\%\&\'\*\+\-\/\=\?\^\`{\|\}\~]+\.)*[\w\!\#$\%\&\'\*\+\-\/\=\?\^\`{\|\}\~]+@((((([a-z0-9]{1}[a-z0-9\-]{0,62}[a-z0-9]{1})|[a-z])\.)+[a-z]{2,6})|(\d{1,3}\.){3}\d{1,3}(\:\d{1,5})?)$/i)) {
+        this.loginError = `The Email doesn't look valid.`
+        return
+      }
+      this.loginError = null
+
+      try {
+        const response = await apolloClient.query({
+          query: LOGIN,
+          variables: {
+            email: this.email,
+            password: this.password
+          }
+        })
+        if (!response.data || !response.data.logIn || !response.data.logIn.token) {
+          console.error('Invalid username or password')
+          throw new Error(JSON.stringify(response))
+        }
+        window.localStorage.setItem('token', response.data.logIn.token)
+        window.localStorage.setItem('userId', response.data.logIn._id)
+        this.router.push({
+          path: '/'
+        })
+        return
+      } catch (e) {
+        console.error('Login failed:', e)
+        this.loginError = 'Connection error!\nInvalid email or password.'
+      }
+    }
+  }
 }
 </script>
 

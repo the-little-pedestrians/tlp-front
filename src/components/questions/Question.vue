@@ -2,9 +2,11 @@
   <div>
     <h1 class="title accent--text">{{ question.title }}</h1>
     <div class="question">
-      <Textual v-if="question.type === 'textual'" :label="question.label" :value="question.value"></Textual>
-      <MultiMovies v-if="question.type === 'multi'" :movies="question.movies"></MultiMovies>
-      <MonoMovie v-if="question.type === 'mono'" :movie="question.movie"></MonoMovie>
+      <transition name="pageChange" mode="out-in">
+        <Textual v-if="question.type === 'textual'" :label="question.label" :value="question.value"></Textual>
+        <MultiMovies v-if="question.type === 'multi'" :movies="question.movies"></MultiMovies>
+        <MonoMovie v-if="question.type === 'mono'" :movie="question.movie"></MonoMovie>
+      </transition>
     </div>
     <div class="skip">
       <v-btn @click="skip" flat color="primary" class="bordered">Passer cette question</v-btn>
@@ -111,5 +113,20 @@ h1 {
   width: 100%;
   position: fixed;
   bottom: 10%;
+}
+
+.pageChange-enter-active {
+  animation: scaleUp .7s ease both;
+}
+.pageChange-leave-active {
+  animation: fade .7s ease both;
+}
+@keyframes scaleUp {
+  from { opacity: 0; transform: scale(1); }
+  1% { opacity: 0; transform: scale(.8); }
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes fade {
+  to { opacity: 0; }
 }
 </style>
