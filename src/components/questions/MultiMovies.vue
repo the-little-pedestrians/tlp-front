@@ -2,13 +2,18 @@
   <v-layout row flex v-if="movies">
     <v-flex md1></v-flex>
     <v-flex md2 v-for="movie in movies" :key="movie.id" class="movie-tile">
-      <v-layout class="movieCard">
-        <v-flex md12 sm6 offset-sm1>
+      <v-layout class="movieCard" @click="$emit('selected', movie.id)">
+        <v-flex md12>
           <v-card>
-            <v-card-media :src="movie.url" height="200px">
-            </v-card-media>
-            </v-card>
-          <v-spacer></v-spacer>
+            <v-card-title class="card-title-container text-xs-center">
+              <div class="title-text card-title-text white--text">
+                <span>{{ movie.title }}</span>
+              </div>
+            </v-card-title>
+            <v-card-media :src="movie.url" height="300px"></v-card-media>
+            <v-card-title>{{ movie.tagline }}</v-card-title>
+            <v-card-text class="date"> {{ movie.formattedDate }}</v-card-text>
+          </v-card>
         </v-flex>
       </v-layout>
     </v-flex>
@@ -22,14 +27,35 @@ export default {
 }
 </script>
 
-<style>
-  .movieCard:hover
-  {
+<style scoped>
+  .movieCard:hover {
     transform: scale(1.1);
     transition-duration: .2s;
   }
-  .movieCard
-  {
+
+  .movieCard {
     transition-duration: .2s;
+    padding: 3px;
+    cursor: pointer;
+  }
+
+  .card-title-container {
+    background-color: rgba(0, 0, 0, .6);
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .card-title-text {
+    height: 4.95em;
+    font-size: 1em;
+    font-weight: 700;
+    line-height: 1.65em;
+    padding: 10px 15px;
+  }
+
+  .date {
+    font-weight: 700;
   }
 </style>

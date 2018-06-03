@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="textual">
     <v-text-field :label="label" :value="value"></v-text-field>
   </div>
 </template>
@@ -12,5 +12,8 @@ export default {
 </script>
 
 <style scoped>
-
+  .textual {
+    width: 300px;
+    margin: auto;
+  }
 </style>
