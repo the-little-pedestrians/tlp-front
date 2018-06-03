@@ -17,7 +17,7 @@ import router from './router'
 import 'vuetify/dist/vuetify.min.css'
 
 const httpLink = createHttpLink({
-  uri: process.env.SERVER_URL || '/graphql',
+  uri: process.env.SERVER_URL || 'http://back/graphql',
   fetch: fetch
 })
 
