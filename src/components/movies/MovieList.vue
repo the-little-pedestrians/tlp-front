@@ -2,7 +2,7 @@
   <div>
     <v-layout row flex v-if="movies">
       <v-flex md1></v-flex>
-      <v-flex md2 v-for="movie in movies" :key="movie.id" class="movie-tile">
+      <v-flex md2 v-for="movie in movies" :key="movie.id" class="movie-title">
         <v-layout @click.stop="dialog = true">
           <v-flex md10 sm7 offset-sm1>
             <v-card>
@@ -157,5 +157,10 @@ h1{
   text-align: justify;
   padding-left: 50px;
   margin-top: 50px;
+}
+.movie-title
+{
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
 </style>

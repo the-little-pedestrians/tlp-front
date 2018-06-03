@@ -3,9 +3,6 @@
     <NavBar></NavBar>
     <div class="listeFilm">
         <MovieList></MovieList>
-        <v-layout>
-            <v-spaccer></v-spaccer>
-        </v-layout>
         <MovieList></MovieList>
     </div>
 </div>

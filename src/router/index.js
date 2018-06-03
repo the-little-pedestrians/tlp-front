@@ -1,10 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-
 import Question from '@/components/questions/Question'
 import Login from '@/components/auth/Login'
 import MonoMovie from '@/components/questions/MonoMovie'
-import recommandation from '@/components/movies/recommandation'
+import Recommandations from '@/components/movies/Recommandations'
 
 Vue.use(Router)
 
@@ -26,9 +25,9 @@ export default new Router({
       component: MonoMovie
     },
     {
-      path: '/recommandation',
-      name: 'recommandation',
-      component: recommandation
+      path: '/Recommandations',
+      name: 'Recommandations',
+      component: Recommandations
     }
   ]
 })
