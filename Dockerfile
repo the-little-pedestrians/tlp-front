@@ -5,7 +5,12 @@ COPY . .
 RUN yarn
 RUN yarn build
 
-FROM nginx:1.13.12-alpine
-COPY --from=build /tmp/tlpfront/dist /usr/share/nginx/html
+# FROM nginx:1.13.12-alpine
+# COPY --from=build /tmp/tlpfront/dist /usr/share/nginx/html
+
+FROM gcr.io/thelittlepedestrians-206020/tlp-proxy:latest
+
+RUN mkdir front
+COPY --from=build /tmp/tlpfront/dist front
 
 EXPOSE 80
