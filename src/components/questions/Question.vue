@@ -3,7 +3,7 @@
     <h1 class="title accent--text">{{ question.title }}</h1>
     <div class="question">
       <transition name="pageChange" mode="out-in">
-        <Textual v-if="question.type === 'textual'" :label="question.label" :value="question.value"></Textual>
+        <Textual @validate="validateText" v-if="question.type === 'textual'" :label="question.label" :value="question.value"></Textual>
         <MultiMovies v-if="question.type === 'multi'" :movies="question.movies" @selected="likeMovie"></MultiMovies>
         <MonoMovie @like="likeMovie" @dislike="dislikeMovie" v-if="question.type === 'mono'" :movie="question.movie"></MonoMovie>
       </transition>
@@ -19,7 +19,7 @@ import { apolloClient } from '@/main'
 import MonoMovie from './MonoMovie'
 import MultiMovies from './MultiMovies'
 import Textual from './Textual'
-import { INIT_MOVIES } from '../../queries'
+import { INIT_MOVIES } from '@/queries'
 import moment from 'moment'
 
 export default {
@@ -44,12 +44,16 @@ export default {
     dislikeMovie (id) {
       this.goNext()
     },
+    validateText (value) {
+      this.goNext()
+    },
     skip () {
       this.goNext()
     },
     goNext () {
       if (this.index === this.questions.length - 1) {
-        this.index = 0
+        // this.index = 0
+        this.$router.push('/done')
         return
       }
       this.index += 1
@@ -66,15 +70,23 @@ export default {
       this.questions = [
         {
           type: 'multi',
-          title: 'Quel film préferrez-vous ?',
-          movies: this.movies.slice(30, 35)
+          title: 'Which movie do you prefer?',
+          movies: this.movies.slice(0, 5)
         }, {
           type: 'mono',
-          title: 'Aimez-vous ce film ?',
+          title: 'Do you like this movie?',
           movie: this.movies[5]
         }, {
+          type: 'multi',
+          title: 'Chose one of these movies',
+          movies: this.movies.slice(6, 11)
+        }, {
+          type: 'mono',
+          title: 'What about this one?',
+          movie: this.movies[11]
+        }, {
           type: 'textual',
-          title: 'A-t-on deviné votre âge ?',
+          title: 'We have guessed your age!',
           label: 'Age',
           value: 25
         }

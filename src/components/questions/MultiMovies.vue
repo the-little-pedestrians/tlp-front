@@ -11,8 +11,10 @@
               </div>
             </v-card-title>
             <v-card-media :src="movie.url" height="300px"></v-card-media>
-            <v-card-title>{{ movie.tagline }}</v-card-title>
-            <v-card-text class="date"> {{ movie.formattedDate }}</v-card-text>
+            <v-card-title class="punchline">
+              {{ movie.tagline }}
+            </v-card-title>
+            <v-card-text class="date">{{ movie.formattedDate }}</v-card-text>
           </v-card>
         </v-flex>
       </v-layout>
@@ -53,6 +55,15 @@ export default {
     font-weight: 700;
     line-height: 1.65em;
     padding: 10px 15px;
+  }
+
+  .punchline {
+    height: 3.6em;
+    font-size: 1em;
+    line-height: 1.2em;
+    overflow: hidden;
+    align-items: baseline;
+    justify-content: center;
   }
 
   .date {

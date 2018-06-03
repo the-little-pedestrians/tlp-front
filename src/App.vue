@@ -1,11 +1,10 @@
 <template>
   <v-app dark>
-    <!-- <v-navigation-drawer app></v-navigation-drawer>
-    <v-toolbar app></v-toolbar> -->
-    <v-content>
-      <router-view></router-view>
-    </v-content>
-    <!-- <v-footer app></v-footer> -->
+    <transition name="pageChange" mode="out-in">
+      <v-content>
+        <router-view></router-view>
+      </v-content>
+    </transition>
   </v-app>
 </template>
 
@@ -31,5 +30,24 @@ html, body, main.content, .main>.container {
 
 .bordered {
   border: 1px solid #ddd;
+}
+
+.pageChange-enter-active {
+  animation: scaleUp .7s ease both;
+}
+.pageChange-leave-active {
+  animation: fade .7s ease both;
+}
+@keyframes scaleUp {
+  from { opacity: 0; transform: scale(1); }
+  1% { opacity: 0; transform: scale(.8); }
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes fade {
+  to { opacity: 0; }
+}
+
+body {
+  background: #333;
 }
 </style>

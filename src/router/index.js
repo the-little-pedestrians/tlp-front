@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Question from '@/components/questions/Question'
-import MonoMovie from '@/components/questions/MonoMovie'
 import Recommandations from '@/components/movies/Recommandations'
 import Login from '@/components/auth/Login'
 import Register from '@/components/auth/Register'
@@ -26,12 +25,7 @@ export default new Router({
       component: Login
     },
     {
-      path: '/MonoMovie',
-      name: 'MonoMovie',
-      component: MonoMovie
-    },
-    {
-      path: '/Recommandations',
+      path: '/recommanded',
       name: 'Recommandations',
       component: Recommandations
     }
