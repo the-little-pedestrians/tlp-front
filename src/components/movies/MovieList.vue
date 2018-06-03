@@ -4,10 +4,10 @@
     <v-layout row flex v-if="movies">
       <v-flex md1></v-flex>
       <v-flex md2 v-for="movie in movies" :key="movie.id" class="movie-tile">
-        <v-layout class="movieCard">
+        <v-layout class="movieCard" @click.stop="dialog = true">
           <v-flex md12 sm6 offset-sm1>
             <v-card>
-              <v-card-media :src="movie.url" height="200px" @click.stop="modalMovie">
+              <v-card-media :src="movie.url" height="200px">
               </v-card-media>
               </v-card>
             <v-spacer></v-spacer>
@@ -15,6 +15,27 @@
         </v-layout>
       </v-flex>
     </v-layout>
+    <v-layout row justify-center>
+    <v-dialog v-model="dialog" fullscreen hide-overlay transition="dialog-bottom-transition">
+      <v-card>
+        <v-toolbar dark color="secondary">
+          <v-toolbar-title>Titre du film</v-toolbar-title>
+          <v-spacer></v-spacer>
+          <v-btn icon dark @click.native="dialog = false">
+            <v-icon>close</v-icon>
+          </v-btn>
+        </v-toolbar>
+        <v-layout row flex>
+          <v-flex mb7 sm6>
+            <v-card-media src='http://fr.web.img4.acsta.net/r_1280_720/pictures/17/05/09/15/47/313876.jpg' contain=true></v-card-media>
+          </v-flex>
+          <v-flex mb6 sm6>
+            <h1>OLAAAA</h1>
+          </v-flex>
+        </v-layout>
+      </v-card>
+    </v-dialog>
+  </v-layout>
     </div>
 </template>
 
@@ -28,6 +49,11 @@ export default {
   },
 
   data: () => ({
+    dialog: false,
+    notifications: false,
+    sound: true,
+    widgets: false,
+
     movies: [
       {
         id: 1,
@@ -56,8 +82,8 @@ export default {
         url: 'http://fr.web.img3.acsta.net/r_1280_720/medias/nmedia/18/35/57/73/18660716.jpg'
       }
     ]
-  }
-  )
+  })
+
 }
 </script>
 
