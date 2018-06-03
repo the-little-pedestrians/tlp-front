@@ -2,11 +2,8 @@
   <div class="register-page">
     <div class="register-container">
     <div class="title">
-      <h1><span class="s-letter">L</span>es <span class="s-letter">P</span>etits <span class="s-letter">P</span>édestres</h1>
+      <h1>Now that we know you better, fill this in so we can recommand awesome movies!</h1>
     </div>
-    <h2 class="accent--text">
-      Now that we know you better, fill this in so we can recommand awesome movies!
-    </h2>
     <v-layout class="form-register" row wrap>
       <v-flex xs12 class="email">
         <v-text-field
@@ -39,7 +36,7 @@
       color="accent"
       dark
       @click.stop="register"
-    >S'enregistrer</v-btn>
+    >Register</v-btn>
   </div>
   </div>
 </template>
@@ -116,10 +113,9 @@ export default {
   left: 45%;
 }
 .form-register{
-  width: 60%;
-  margin-left: 20%;
+  width: 40%;
+  margin-left: 30%;
   position: relative;
-  border: 1px solid #ddd;
   border-radius: 4px;
   margin-top: 50px;
   margin-bottom: 50px;
@@ -129,7 +125,6 @@ export default {
 }
 .form-register .password {
   padding: 10px;
-  border-top: 1px solid #ddd;
 }
 .title{
   justify-content: center;
