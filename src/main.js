@@ -17,12 +17,12 @@ import router from './router'
 import 'vuetify/dist/vuetify.min.css'
 
 const httpLink = createHttpLink({
-  uri: process.env.SERVER_URL || 'https://localhost:3333/graphql',
+  uri: process.env.SERVER_URL || '/graphql',
   fetch: fetch
 })
 
 const wsLink = new WebSocketLink({
-  uri: process.env.SERVER_URL_SUB || 'wss://localhost:3333/subscriptions',
+  uri: process.env.SERVER_URL_SUB || 'wss://socoback.herokuapp.com/subscriptions',
   options: {
     reconnect: true
   }
