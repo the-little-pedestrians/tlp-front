@@ -108,7 +108,7 @@ export default {
         window.localStorage.setItem('token', response.data.logIn.token)
         window.localStorage.setItem('userId', response.data.logIn._id)
         this.router.push({
-          path: '/'
+          path: '/recommanded'
         })
         return
       } catch (e) {

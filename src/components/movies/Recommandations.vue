@@ -1,10 +1,14 @@
 <template>
 <div class="navBar">
-    <NavBar></NavBar>
+  <NavBar></NavBar>
     <div class="listeFilm">
-        <MovieList></MovieList>
-        <MovieList></MovieList>
-    </div>
+      <h1>Recommanded for you</h1>
+      <MovieList></MovieList>
+      <h1>Action movies</h1>
+      <MovieList></MovieList>
+      <h1>Comedies</h1>
+      <MovieList></MovieList>
+  </div>
 </div>
 </template>
 

@@ -11,3 +11,17 @@ query logIn($email: String!, $password: String!) {
   }
 }
 `
+
+export const INIT_MOVIES = gql`
+query{
+  getInitMovies{
+    title
+    poster_path
+    genres
+    overview
+    tagline
+    vote_average
+    release_date
+  }
+}
+`
